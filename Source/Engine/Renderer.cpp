@@ -22,19 +22,19 @@ void Renderer::ShutDown()
 bool Renderer::CreateWindow(const std::string& name, int width, int height)
 {
 
-    SDL_Window* window = SDL_CreateWindow(name.c_str(), width, height, 0);
+    m_window = SDL_CreateWindow(name.c_str(), width, height, 0);
     if (m_window == nullptr) {
         std::cerr << "SDL_CreateWindow Error: " << SDL_GetError() << std::endl;
         SDL_Quit();
-        return 1;
+        return false;
     }
 
-    SDL_Renderer* renderer = SDL_CreateRenderer(m_window, NULL);
+    m_renderer = SDL_CreateRenderer(m_window, NULL);
     if (m_renderer == nullptr) {
         std::cerr << "SDL_CreateRenderer Error: " << SDL_GetError() << std::endl;
         SDL_DestroyWindow(m_window);
         SDL_Quit();
-        return 1;
+        return false;
     }
 	return false;
 }

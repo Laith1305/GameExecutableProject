@@ -12,6 +12,7 @@ int main(int argc, char* argv[]) {
     viper::Time time;
     Renderer renderer;
     renderer.Initialize();
+    renderer.CreateWindow("Screen", 1280, 1024);
 
     //SDL_Init(SDL_INIT_VIDEO);
 
@@ -23,7 +24,7 @@ int main(int argc, char* argv[]) {
     std::vector<viper::vec2> stars;
     for (int i = 0; i < 100; i++) {
         stars.push_back(viper::vec2{ viper::random::getRandomFloat() * 1280, viper::random::getRandomFloat() * 1024 });
-        renderer.Clear();
+       
 
     }
     
@@ -51,7 +52,7 @@ int main(int argc, char* argv[]) {
         renderer.Present();*/
 
 
-        viper::vec2 speed{ -0.1f, 0.0f };
+        viper::vec2 speed{ -140.0f, 0.0f };
         float length = speed.Length();
 
         for (auto& star : stars) {
@@ -67,7 +68,7 @@ int main(int argc, char* argv[]) {
         }
         
 
-
+        renderer.Present();
 
 
 
@@ -95,7 +96,7 @@ int main(int argc, char* argv[]) {
     /*SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);*/
     renderer.ShutDown();
-    SDL_Quit();
+    //SDL_Quit();
 
     return 0;
 }
