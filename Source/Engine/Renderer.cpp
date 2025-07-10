@@ -3,8 +3,8 @@
 
 
 bool Renderer::Initialize() {
-	if (SDL_Init(SDL_INIT_VIDEO)) {
-		std::cerr << SDL_GetError() << std::endl;
+	if (!SDL_Init(SDL_INIT_VIDEO)) {
+		std::cerr << "SDL_Init Error: " << SDL_GetError() << std::endl;
 		return false;
 	}
 
