@@ -15,20 +15,35 @@
     <Filter Include="Source\Math">
       <UniqueIdentifier>{00da4387-43fb-4115-8632-06e5f940236e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Renderer">
+      <UniqueIdentifier>{0804fdf5-c8f3-4641-98b8-94a3169699d9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
       <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Source\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="eTime.cpp">
+      <Filter>Source\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Random.h">
       <Filter>Source\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Time.h">
+    <ClInclude Include="eTime.h">
       <Filter>Source\Core</Filter>
     </ClInclude>
     <ClInclude Include="Core\Math.h">
+      <Filter>Source\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Renderer (2).h">
+      <Filter>Source\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Vector2.h">
       <Filter>Source\Math</Filter>
     </ClInclude>
   </ItemGroup>
