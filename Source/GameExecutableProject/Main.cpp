@@ -13,7 +13,7 @@ int main(int argc, char* argv[]) {
     Renderer renderer;
     renderer.Initialize();
 
-    SDL_Init(SDL_INIT_VIDEO);
+    //SDL_Init(SDL_INIT_VIDEO);
 
     
 
@@ -22,7 +22,7 @@ int main(int argc, char* argv[]) {
     
     std::vector<viper::vec2> stars;
     for (int i = 0; i < 100; i++) {
-        stars.push_back(viper::vec2{ viper::random::getRandomInt(1280), viper::random::getRandomInt(1280) });
+        stars.push_back(viper::vec2{ viper::random::getRandomFloat() * 1280, viper::random::getRandomFloat() * 1024 });
         renderer.Clear();
 
     }

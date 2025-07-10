@@ -39,7 +39,7 @@ namespace viper {
 
 		// square root ( x * x + y * y)
 		float LengthSqr() const { return (x * x) + (y * y); }
-		float Length() const { return math::sqrtf(LengthSqr()); }
+		float Length() const { return sqrtf(LengthSqr()); }
 	};
 
 	using ivec2 = Vector2<int>;
