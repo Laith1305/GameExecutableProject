@@ -12,7 +12,7 @@
 
 
 int main(int argc, char* argv[]) {
-    viper::InputSystem inputSystem;
+    //viper::InputSystem inputSystem;
     
     viper::Time time;
     Renderer renderer;
@@ -40,10 +40,19 @@ int main(int argc, char* argv[]) {
 
     }
     
-    // Define a rectangle
     
     FMOD::Sound* sound = nullptr;
     audio->createSound("test.wav", FMOD_DEFAULT, 0, &sound);
+    std::vector<FMOD::Sound*> sounds;
+    audio->createSound("bass.wav", FMOD_DEFAULT, 0, &sound);
+    sounds.push_back(sound);
+
+    audio->createSound("snare.wav", FMOD_DEFAULT, 0, &sound);
+    sounds.push_back(sound);
+
+    // Define a rectangle
+    
+    
 
     audio->playSound(sound, 0, false, nullptr);
 
@@ -67,8 +76,8 @@ int main(int argc, char* argv[]) {
         }
 
 
-        if (inputSystem.GetMouseButtonDown(viper::InputSystem::MouseButton::Left)) {
-            viper::vec2 position = inputSystem.GetMousePosition();
+        if (input.GetMouseButtonDown(viper::InputSystem::MouseButton::Left)) {
+            viper::vec2 position = input.GetMousePosition();
             if (points.empty()) points.push_back(position);
             else if ((position - points.back()).Length() > 10) points.push_back(position);
         }
@@ -89,6 +98,25 @@ int main(int argc, char* argv[]) {
         /*renderer.SetColor(0, 0, 0);
         renderer.Clear();*/
 
+        if (input.getKeyDown(SDL_SCANCODE_Q) && !input.getPrevKeyDown(SDL_SCANCODE_Q)) {
+        
+            audio->playSound(sounds[0], nullptr, false, nullptr);
+        
+        }
+        if (input.getKeyDown(SDL_SCANCODE_W) && !input.getPrevKeyDown(SDL_SCANCODE_Q)) {
+        
+            audio->playSound(sounds[1], nullptr, false, nullptr);
+        
+        }
+        if (input.getKeyDown(SDL_SCANCODE_E) && !input.getPrevKeyDown(SDL_SCANCODE_Q)) {
+        
+            audio->playSound(sounds[2], nullptr, false, nullptr);
+        
+        }
+      
+    
+    }
+
         
 
 
@@ -98,7 +126,7 @@ int main(int argc, char* argv[]) {
 
 
         
-        for (auto& star : stars) {
+        /*for (auto& star : stars) {
             star += speed * time.GetDeltaTime();
 
 
@@ -108,17 +136,20 @@ int main(int argc, char* argv[]) {
             renderer.SetColor(viper::random::getRandomInt(256), viper::random::getRandomInt(256), viper::random::getRandomInt(256), viper::random::getRandomInt(256));
             renderer.DrawPoint(star.x, star.y);
 
-        }
+        }*/
         
 
         renderer.Present();
+        renderer.ShutDown();
+        //SDL_Quit();
+
+        return 0;
+}
 
 
 
 
-    }
 
-   
 
 
 
@@ -138,8 +169,5 @@ int main(int argc, char* argv[]) {
 
     /*SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);*/
-    renderer.ShutDown();
-    //SDL_Quit();
-
-    return 0;
-}
+   
+   
