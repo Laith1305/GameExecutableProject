@@ -6,17 +6,29 @@
 #include "Math/Vector2.h"
 #include "../Engine/Core/Random.h"
 #include "../Engine/Renderer/Renderer (2).h"
+#include "../Engine/Input/InputSystem.h"
+#include <fmod.hpp>
+#include "Input/InputSystem.h"
+
 
 int main(int argc, char* argv[]) {
-
+    viper::InputSystem inputSystem;
+    
     viper::Time time;
     Renderer renderer;
     renderer.Initialize();
     renderer.CreateWindow("Screen", 1280, 1024);
 
     //SDL_Init(SDL_INIT_VIDEO);
+    viper::InputSystem input;
+    input.Initialize();
 
-    
+    // create audio system
+    FMOD::System* audio;
+    FMOD::System_Create(&audio);
+
+    void* extradriverdata = nullptr;
+    audio->init(32, FMOD_INIT_NORMAL, extradriverdata);
 
     SDL_Event e;
     bool quit = false;
@@ -30,6 +42,12 @@ int main(int argc, char* argv[]) {
     
     // Define a rectangle
     
+    FMOD::Sound* sound = nullptr;
+    audio->createSound("test.wav", FMOD_DEFAULT, 0, &sound);
+
+    audio->playSound(sound, 0, false, nullptr);
+
+    std::vector<viper::vec2> points;
 
     while (!quit) {
         time.Tick();
@@ -40,9 +58,36 @@ int main(int argc, char* argv[]) {
             }
         }
         
+        audio->update();
+
+        input.Update();
+        if (input.getKeyReleased(SDL_SCANCODE_A)) {
+
+            std::cout << "Pressed \n";
+        }
+
+
+        if (inputSystem.GetMouseButtonDown(viper::InputSystem::MouseButton::Left)) {
+            viper::vec2 position = inputSystem.GetMousePosition();
+            if (points.empty()) points.push_back(position);
+            else if ((position - points.back()).Length() > 10) points.push_back(position);
+        }
+  
+        for (int i = 0; i < (int)points.size() - 1; i++) {
+            // set color or random color
+            renderer.SetColor(viper::random::getRandomInt(256), viper::random::getRandomInt(256), viper::random::getRandomInt(256), viper::random::getRandomInt(256));
+            renderer.DrawLine(points[i].x, points[i].y, points[i + 1].x, points[i + 1].y);
+        }
         
-        renderer.SetColor(0, 0, 0);
-        renderer.Clear();
+
+        viper::vec2 speed{ -140.0f, 0.0f };
+        float length = speed.Length();
+
+        viper::vec2 mouse = input.GetMousePosition();
+        std::cout << mouse.x << " " << mouse.y << std::endl;
+
+        /*renderer.SetColor(0, 0, 0);
+        renderer.Clear();*/
 
         
 
@@ -52,9 +97,7 @@ int main(int argc, char* argv[]) {
         renderer.Present();*/
 
 
-        viper::vec2 speed{ -140.0f, 0.0f };
-        float length = speed.Length();
-
+        
         for (auto& star : stars) {
             star += speed * time.GetDeltaTime();
 
