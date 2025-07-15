@@ -49,6 +49,8 @@ int main(int argc, char* argv[]) {
 
     audio->createSound("snare.wav", FMOD_DEFAULT, 0, &sound);
     sounds.push_back(sound);
+    audio->createSound("clap.wav", FMOD_DEFAULT, 0, &sound);
+    sounds.push_back(sound);
 
     // Define a rectangle
     
@@ -114,6 +116,7 @@ int main(int argc, char* argv[]) {
         
         }
       
+
     
     }
 
