@@ -4,6 +4,7 @@
 #include "math.h"
 #include <eTime.h>
 #include "Math/Vector2.h"
+#include "Vector3.h"
 #include "../Engine/Core/Random.h"
 #include "../Engine/Renderer/Renderer (2).h"
 #include "../Engine/Input/InputSystem.h"
@@ -117,6 +118,7 @@ int main(int argc, char* argv[]) {
         }
       
 
+        //viper::vec3 color{ 1, 0, 0 };
     
     }
 
