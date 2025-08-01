@@ -16,14 +16,6 @@ namespace viper {
 
 	}
 
-	/*inline float wrap(float value, float min, float max) {
-
-		float range = max - min;
-		float result = (value - min) % range;
-		if (result < 0) result += range;
-
-		return min + result;
-
-	}*/
+	
 
 }
